@@ -1,12 +1,19 @@
 version: '3.0'
 
 services:
-  gateway:
-    build:
-      context: ./gateway
-    ports:
-      - '80:80'
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./faas-gateway:~/go/src/github.com/pintjuk/faas/faas-gateway
-
+    gateway:
+        build:
+            context: ./gateway
+        ports:
+            - '80:80'
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./gateway:/go/src/github.com/pintjuk/faas/gateway
+    factorial:
+        build:
+            context: ./factorial
+        labels:
+            - "faas.name=factorial"
+            - "faas.port=8080"
+        volumes:
+            - ./factorial:/go/src/github.com/pintjuk/faas/factorial

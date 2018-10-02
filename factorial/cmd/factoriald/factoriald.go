@@ -2,10 +2,9 @@ package main
 
 import (
 	"errors"
-	"fmt"
-	"github.com/labstack/echo"
-	"net/http"
+	"github.com/pintjuk/faas/function"
 	"strconv"
+	"strings"
 )
 
 var memory map[int]int
@@ -27,37 +26,31 @@ func factorial(x int) (res int, err error) {
 			res, err = factorial(x - 1)
 			res *= x
 		}
+		if res <= 0 {
+			err = errors.New("Integer overflow!")
+		}
 		memory[x] = res
 	}
 	return
 }
 
+func factorialWrap(param map[string][]string) (out string, err error) {
+	param1s, ok := param["param-1"]
+	if !ok {
+		err = errors.New("ERROR:\n\t Mising param-1")
+		return
+	}
+	param1i, err := strconv.Atoi(strings.Join(param1s, ""))
+	if err != nil {
+		err = errors.New("Parameters are:\n\tparam-1 (integer)")
+		return
+	}
+	res, err := factorial(param1i)
+	out = strconv.Itoa(res)
+	return
+}
+
 func main() {
 	memory = make(map[int]int)
-	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-
-		fmt.Println("#Recived Request:")
-		fmt.Println("\t- ", (c.Request()).URL.Host)
-		fmt.Println("\t- ", (c.Request()).URL.Path)
-		param1s := c.QueryParam("param-1")
-		fmt.Println("\t- pram1: ", param1s)
-		param1i, err := strconv.Atoi(param1s)
-		if err != nil {
-			fmt.Println("ERROR:\n\t invalid parameter in request")
-			return c.String(http.StatusBadRequest,
-				"Parameters are:\n\tparam-1 (integer)")
-		}
-
-		fmt.Println("\t- pram1i: ", param1i)
-		fmt.Println("\t- err: ", err)
-		res, err := factorial(param1i)
-		if err != nil {
-			fmt.Println(err)
-			return c.String(http.StatusBadRequest,
-				err.Error())
-		}
-		return c.String(http.StatusOK, strconv.Itoa(res))
-	})
-	e.Logger.Fatal(e.Start(":8080"))
+	function.RunFunction(factorialWrap)
 }

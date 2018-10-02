@@ -89,3 +89,6 @@ tags
 *.fsw.yml
 /factorial/cmd/factoriald/factoriald
 /gateway/cmd/gatewayd/gatewayd
+/factorial/vendor/*
+/gateway/vendor/*
+/gateway/fsw.yml

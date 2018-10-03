@@ -1,3 +1,9 @@
+/*
+This is a library for running a go function as a HTTP micro service
+
+Just call RunFunc with your function, and it will create and run a web-server
+        Runfunc([]string{"arg1", "arg2"}, myFunction, ":8080")
+*/
 package function
 
 import (
@@ -106,19 +112,33 @@ func callFunc(f interface{}, argNames []string, c echo.Context) (res string, err
 	return
 }
 
-/***********************************************/
-/* Starts a webs server to run this function f */
-/* as a micro service                          */
-/*                                             */
-/*  - f has to be a function                   */
-/*  - f's arguments have a primitive or string */
-/*  - f must have 2 return valrues,            */
-/*    second of witch must have type error     */
-/***********************************************/
+/*
+Starts a webs server to run this function f  as a micro service.
 
-func RunFunc(argNames []string, f interface{}) {
+ArgNames
+
+List of query parameter names to use as input arguments to your function.
+
+- have to match arguments of function f.
+
+Function
+
+Function used for processing requests.
+
+- f's arguments have a primitive or string type.
+
+- f first return value have a perimeter or a string type.
+
+- f may have a second return value, witch has to be an error.
+RunFunc panics if any of above conditions are violated.
+
+Path
+
+path and port number for the http server.
+*/
+func RunFunc(argNames []string, function interface{}, addr string) {
 	/* Validate input */
-	fValue := reflect.ValueOf(f)
+	fValue := reflect.ValueOf(function)
 	fType := fValue.Type()
 	if fValue.Kind() != reflect.Func {
 		panic("First argument to RunFunc has to be a function")
@@ -144,14 +164,14 @@ func RunFunc(argNames []string, f interface{}) {
 			panic(fmt.Sprint("Argument number ", i, "has invalid type, use only primitive types and strings"))
 		}
 	}
-	/* Start webserver */
+	/* Start web-server */
 	e := echo.New()
 	e.GET("/", func(c echo.Context) error {
 
-		fmt.Println("#Recived Request:")
+		fmt.Println("#Received Request:")
 		fmt.Println("\t- ", (c.Request()).URL.Host)
 		fmt.Println("\t- ", (c.Request()).URL.Path)
-		res, err := callFunc(f, argNames, c)
+		res, err := callFunc(function, argNames, c)
 		if err != nil {
 			fmt.Println(err)
 			return c.String(http.StatusBadRequest,
@@ -159,5 +179,5 @@ func RunFunc(argNames []string, f interface{}) {
 		}
 		return c.String(http.StatusOK, res)
 	})
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start(addr))
 }

@@ -52,7 +52,7 @@ func main() {
 Just pas any regular golang function to RunFunc, and the library will spin up a web server running this function.
 
 
-to make it work with the faas gateway you need to run it in a docker container with with labels 
+to make it work with the FAAS gateway you need to run it in a docker container with with labels 
 
 ``` 
 
@@ -66,5 +66,5 @@ and
 faas.port={the port you used for its web server}
 ```
 
-If the faas gateway is already running then it will detect your function container automatically and start forwarding function calls to it. 
+With this lables the FAAS gateway will detect your function container automatically and start forwarding function calls to it. 
 

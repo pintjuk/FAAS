@@ -1,4 +1,4 @@
-#FAAS
+# FAAS
 
 This is a simple demo implementing Function as a service (see AWS Lambda). It utilizes docker to manage the scaling of function.
 

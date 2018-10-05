@@ -32,7 +32,7 @@ cd faas
 docker-compuose up
 ```
 
-## Creating a custom function
+## Creating a your function
 Creating a function is easy using the faas/function library.
 
 ``` golang

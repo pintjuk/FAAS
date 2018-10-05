@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#a fun visualizer of the network
+wget -O scope git.io/scope
+chmod a+x ./scope
+./scope launch

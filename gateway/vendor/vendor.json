@@ -3,6 +3,14 @@
 	"ignore": "test",
 	"package": [
 		{
+			"path": "atomic",
+			"revision": ""
+		},
+		{
+			"path": "contecxt",
+			"revision": ""
+		},
+		{
 			"checksumSHA1": "PbR6ZKoLeSZl8aXxDQqXih0wSgE=",
 			"path": "github.com/Microsoft/go-winio",
 			"revision": "97e4973ce50b2ff5f09635a57e2b88a037aae829",
@@ -169,6 +177,10 @@
 			"path": "github.com/labstack/echo",
 			"revision": "036e6961aebec9e95c29c16bb7b1df64ac5ac601",
 			"revisionTime": "2018-09-28T17:47:23Z"
+		},
+		{
+			"path": "github.com/labstack/echo/config",
+			"revision": ""
 		},
 		{
 			"checksumSHA1": "644SDuBjJDLqDr+Z4rL/5I/M6kE=",

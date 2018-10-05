@@ -93,3 +93,4 @@ tags
 /gateway/vendor/*
 /gateway/fsw.yml
 /addition/vendor/*
+/function/vendor/*

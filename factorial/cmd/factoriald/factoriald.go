@@ -9,7 +9,7 @@ var memory map[int]int
 
 func factorial(x int) (res int, err error) {
 	if x < 0 {
-		err = errors.New("ERROR:\n\tFactorial undefined for negative values!")
+		err = errors.New("Factorial undefined for negative values!")
 		return
 	}
 	err = nil
@@ -33,5 +33,5 @@ func factorial(x int) (res int, err error) {
 
 func main() {
 	memory = make(map[int]int)
-	function.RunFunc([]string{"value"}, factorial)
+	function.RunFunc([]string{"value"}, factorial, ":8080")
 }

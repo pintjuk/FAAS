@@ -10,6 +10,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"net/http"
 	"reflect"
 	"strconv"
@@ -166,18 +167,17 @@ func RunFunc(argNames []string, function interface{}, addr string) {
 	}
 	/* Start web-server */
 	e := echo.New()
+	e.Use(middleware.Recover())
+	e.Use(middleware.Logger())
 	e.GET("/", func(c echo.Context) error {
 
-		fmt.Println("#Received Request:")
-		fmt.Println("\t- ", (c.Request()).URL.Host)
-		fmt.Println("\t- ", (c.Request()).URL.Path)
 		res, err := callFunc(function, argNames, c)
 		if err != nil {
 			fmt.Println(err)
-			return c.String(http.StatusBadRequest,
+			return echo.NewHTTPError(http.StatusBadRequest,
 				err.Error())
 		}
-		return c.String(http.StatusOK, res)
+		return c.HTML(http.StatusOK, res)
 	})
 	e.Logger.Fatal(e.Start(addr))
 }

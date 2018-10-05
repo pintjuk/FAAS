@@ -1,0 +1,11 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"path": "net/http",
+			"revision": ""
+		}
+	],
+	"rootPath": "github.com/pintjuk/faas/gateway/cmd/gatewayd"
+}

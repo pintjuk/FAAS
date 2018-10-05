@@ -45,6 +45,12 @@
 			"revisionTime": "2018-08-30T10:17:45Z"
 		},
 		{
+			"checksumSHA1": "OFBjbiNehWnAw2HrdgUvOb8D8Y8=",
+			"path": "github.com/pintjuk/faas/function",
+			"revision": "7ab18b3c322c3f2628c0f77933f8e72fdba5cc29",
+			"revisionTime": "2018-10-02T21:13:25Z"
+		},
+		{
 			"checksumSHA1": "RZOdTSZN/PgcTqko5LzIAzw+UT4=",
 			"path": "github.com/pmezard/go-difflib/difflib",
 			"revision": "792786c7400a136282c1664665ae0a8db921c6c2",

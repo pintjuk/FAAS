@@ -92,3 +92,4 @@ tags
 /factorial/vendor/*
 /gateway/vendor/*
 /gateway/fsw.yml
+/addition/vendor/*

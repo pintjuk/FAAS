@@ -17,3 +17,11 @@ services:
             - "faas.port=8080"
         volumes:
             - ./factorial:/go/src/github.com/pintjuk/faas/factorial
+    addition:
+        build:
+            context: ./addition
+        labels:
+            - "faas.name=addition"
+            - "faas.port=8080"
+        volumes:
+            - ./addition:/go/src/github.com/pintjuk/faas/addition

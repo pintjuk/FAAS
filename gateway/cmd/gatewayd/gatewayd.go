@@ -26,8 +26,10 @@ func (route *RouteTable) Get() map[string][]string {
 }
 
 func (route *RouteTable) runRebuilder() {
-	time.Sleep(10 * time.Second)
-	route.rebuild()
+	for {
+		time.Sleep(10 * time.Second)
+		route.rebuild()
+	}
 }
 func (route *RouteTable) rebuild() {
 	newRoutes := make(map[string][]string)
@@ -74,7 +76,6 @@ func makeRouteTable() (res RouteTable) {
 	return
 }
 
-var routes = unsafe.Pointer(&map[string][]string{})
 
 
 
@@ -94,6 +95,18 @@ func makeGatewayMV() func(echo.HandlerFunc) echo.HandlerFunc {
 		funcName = funcNameL[0]
 		return
 	}
+
+	counter :=map[string]int{} 
+	getNext := func(name string, max int) (next int) {
+		cur, ok := counter[name]
+		if ok {
+			next = (cur+1) % max
+		}else{
+			next =0
+		}
+		counter[name]= next
+		return 
+	}
 	
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
@@ -110,7 +123,7 @@ func makeGatewayMV() func(echo.HandlerFunc) echo.HandlerFunc {
 					fmt.Sprint("ERROR: ", http.StatusBadRequest,
 						", No such function: ", funcName))
 			}
-			url, err := url.Parse(urls[0])
+			url, err := url.Parse(urls[ getNext(funcName, len(urls))])
 			if err != nil {
 				return echo.NewHTTPError(http.StatusBadRequest,
 					err.Error())

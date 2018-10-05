@@ -17,6 +17,16 @@ services:
             - "faas.port=8080"
         volumes:
             - ./factorial:/go/src/github.com/pintjuk/faas/factorial
+            
+    md2html:
+        build:
+            context: ./md2html
+        labels:
+            - "faas.name=md2html"
+            - "faas.port=8080"
+        volumes:
+            - ./md2html:/go/src/github.com/pintjuk/faas/md2html
+            
     addition:
         build:
             context: ./addition

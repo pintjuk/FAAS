@@ -33,6 +33,8 @@ docker-compuose up
 ```
 
 ## Creating a your function
+A function is a docker container runing a micro service implemented as a single simple golang function.
+
 Creating a function is easy using the faas/function library.
 
 ``` golang

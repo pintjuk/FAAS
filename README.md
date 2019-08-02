@@ -1,3 +1,5 @@
+# Toy FaaS implementation in Golang
+
 So this docker thing seems to be getting some traction, and so does function as a service (FaaS). It would be nice if we could have our own FaaS infrastructure in place instead of paying Amazon for it. There are some alternatives out there e.g. OpenFaaS. But we have a bad case of “Not Invented Here” syndrome, so we built one ourselves.
 
 ![system design](https://pintjuk.github.io/img/2019-06/faas/scetch.png)

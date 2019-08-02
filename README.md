@@ -85,11 +85,9 @@ addition:
 1. Install GoLang.
 2. Install docker and docker-compose.
 3. Install Govendor:
-
 ``` bash
 go get -u github.com/kardianos/govendor
 ```
-
 1. Clone this repo:
 
 ``` bash

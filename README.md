@@ -61,7 +61,7 @@ CMD govendor fetch +m ; go run cmd/*/*.go
 
 And this is its docker compose entry:
 
-```ymal
+```yaml
 addition:
         build:
             context: ./addition

@@ -72,15 +72,28 @@ addition:
             - ./addition:/go/src/github.com/pintjuk/faas/addition
 ```
 
+This is the folder structure for this example:
+
+```tree
+    ├── README.md
+    ├── addition					
+    │   ├── Dockerfile              <- docker file for fuction
+    │   └── cmd
+    │       └── additiond
+    │           └── addition.go     <- function source 
+    ├── docker-compose.yml          <- compose file
+```
+
+
 ## Installation
 
-### Requirements
+###### Requirements
 
 1. Docker
 2. Docker-compose
 3. Govendor
 
-### Installation steps
+###### Installation steps
 
 1. Install GoLang.
 2. Install docker and docker-compose.

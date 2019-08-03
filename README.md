@@ -49,7 +49,7 @@ This is a docker file for the example function addition function above:
 
 FROM golang:1.9
 
-```docker
+```Dockerfile
 # go stuff
 RUN go get -u github.com/kardianos/govendor && \
 go get -u -v github.com/codeskyblue/fswatch
@@ -61,7 +61,7 @@ CMD govendor fetch +m ; go run cmd/*/*.go
 
 And this is its docker compose entry:
 
-```docker-compose
+```ymal
 addition:
         build:
             context: ./addition
